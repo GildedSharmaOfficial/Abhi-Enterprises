@@ -48,6 +48,12 @@ const Header = () => {
             About Us
           </Link>
           <Link
+            to="/blog"
+            className="block mt-4 md:inline-block md:mt-0 text-gray-800 hover:text-gray-600 mr-4"
+          >
+            Blog
+          </Link>
+          <Link
             to="/contact"
             className="block mt-4 md:inline-block md:mt-0 text-gray-800 hover:text-gray-600"
           >
