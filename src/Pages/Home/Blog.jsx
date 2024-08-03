@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from "framer-motion";
 
 const blogPosts = [
   {
@@ -27,9 +28,15 @@ const blogPosts = [
 
 const Blog = () => {
   return (
-    <section className="bg-gray-100 py-12">
+    <section className="bg-[#D2D5B8] py-12">
       <div className="container mx-auto px-6 text-center">
         <h2 className="text-3xl font-bold text-gray-800 mb-8">Latest Blog Posts</h2>
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 2 }}
+        className="text-center py-20"
+      >
         <div className="flex flex-wrap -mx-4">
           {blogPosts.map((post) => (
             <div key={post.title} className="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
@@ -54,6 +61,7 @@ const Blog = () => {
             </div>
           ))}
         </div>
+      </motion.div>
       </div>
     </section>
   );

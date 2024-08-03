@@ -1,79 +1,94 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const ContactPage = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle form submission (e.g., send data to a server or email)
+    console.log(formData);
+    // Reset form
+    setFormData({ name: '', email: '', message: '' });
+  };
+
   return (
-    <div>
-      <main className="bg-gray-100 py-12">
-        <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">Contact Us</h2>
-          <div className="flex flex-col md:flex-row md:justify-between">
-            <div className="w-full md:w-1/2 mb-8 md:mb-0">
-              <h3 className="text-2xl font-semibold text-gray-800 mb-4">Get in Touch</h3>
-              <p className="text-gray-600 mb-6">
-                If you have any questions or need assistance, feel free to reach out to us. Our team is here to help you with all your needs.
-              </p>
-              <div className="flex items-center mb-4">
-                <svg className="w-6 h-6 text-blue-600 mr-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10h3v11H3zM21 10h-3v11h3zM10 3h4v18h-4z" />
-                </svg>
-                <p className="text-gray-600">1234 Main St, Cityville, ST 12345</p>
-              </div>
-              <div className="flex items-center mb-4">
-                <svg className="w-6 h-6 text-blue-600 mr-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 7a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V7z" />
-                </svg>
-                <p className="text-gray-600">info@abhi-enterprises.com</p>
-              </div>
-              <div className="flex items-center">
-                <svg className="w-6 h-6 text-blue-600 mr-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 6a9 9 0 0118 0v12a9 9 0 01-18 0V6z" />
-                </svg>
-                <p className="text-gray-600">+1 (555) 123-4567</p>
-              </div>
-            </div>
-            <div className="w-full md:w-1/2">
-              <form action="#" method="POST" className="bg-white p-6 rounded-lg shadow-lg">
-                <div className="mb-4">
-                  <label htmlFor="name" className="block text-gray-700 text-sm font-semibold mb-2">Name</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    required
-                  />
-                </div>
-                <div className="mb-4">
-                  <label htmlFor="email" className="block text-gray-700 text-sm font-semibold mb-2">Email</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    required
-                  />
-                </div>
-                <div className="mb-4">
-                  <label htmlFor="message" className="block text-gray-700 text-sm font-semibold mb-2">Message</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows="4"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    required
-                  ></textarea>
-                </div>
-                <button
-                  type="submit"
-                  className="w-full px-4 py-2 bg-blue-600 text-white font-semibold rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  Send Message
-                </button>
-              </form>
-            </div>
-          </div>
+    <div className="max-w-5xl mx-auto p-6">
+      <h1 className="text-4xl font-bold text-center mb-8">Contact Me</h1>
+
+      <div className="grid gap-8 md:grid-cols-2">
+        {/* Contact Details */}
+        <div className="bg-white rounded-lg shadow-lg p-6">
+          <h2 className="text-2xl font-semibold mb-4">Get in Touch</h2>
+          <p className="text-gray-700 mb-4">
+            Feel free to reach out to me via the following contact details:
+          </p>
+          <ul className="list-none space-y-2">
+            <li><strong>Name:</strong> Kundan Kumar Sharma</li>
+            <li><strong>Email:</strong> kundan@example.com</li>
+            <li><strong>Phone:</strong> +123 456 7890</li>
+            <li><strong>Address:</strong> 123 Street Name, City, Country</li>
+          </ul>
         </div>
-      </main>
+
+        {/* Contact Form */}
+        <div className="bg-white rounded-lg shadow-lg p-6">
+          <h2 className="text-2xl font-semibold mb-4">Contact Form</h2>
+          <form onSubmit={handleSubmit}>
+            <div className="mb-4">
+              <label htmlFor="name" className="block text-gray-700 font-medium mb-2">Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                placeholder='Your Full Name'
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-500"
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="number" className="block text-gray-700 font-medium mb-2">Email</label>
+              <input
+                type="tel"
+                id="number"
+                name="number"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                placeholder='Mobile Number'
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-500"
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="message" className="block text-gray-700 font-medium mb-2">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                required
+                placeholder='What is your Requirement!'
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-500"
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"
+            >
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };
